@@ -40,9 +40,7 @@ Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
 
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home'); // Can be deleted soon
-
 
 /*
 |--------------------------------------------------------------------------

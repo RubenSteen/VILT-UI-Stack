@@ -15,6 +15,5 @@ class UserController extends AdminBaseController
      */
     public function index()
     {
-
     }
 }
