@@ -43,7 +43,7 @@ class LoginController extends Controller
 
     /**
      * Show the application's login form.
-     * Overrides the method in AuthenticatesUsers
+     * Overrides the method in AuthenticatesUsers.
      *
      * @return \Inertia\Response
      */

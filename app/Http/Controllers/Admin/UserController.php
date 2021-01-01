@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\User\UserUpdate;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
-use App\Models\User;
+use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 
 class UserController extends AdminBaseController
