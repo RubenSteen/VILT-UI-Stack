@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -9,7 +10,7 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -17,8 +18,9 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name',
+        'username',
         'email',
+        'admin',
         'password',
     ];
 
@@ -45,5 +47,30 @@ class User extends Authenticatable implements MustVerifyEmail
     public function isAdmin()
     {
         return $this->admin;
+    }
+
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['trashed'] ?? null, function ($query, $trashed) {
+            if ($trashed === 'with') {
+                $query->withTrashed();
+            } elseif ($trashed === 'only') {
+                $query->onlyTrashed();
+            }
+        })->when($filters['email_verified'] ?? null, function ($query) {
+            $query->whereNotNull('email_verified_at');
+        })->when($filters['email_not_verified'] ?? null, function ($query) {
+            $query->where('email_verified_at', null);
+        });
+    }
+
+    public function scopeSearch($query, $value)
+    {
+        $query->when($value ?? null, function ($query, $search) {
+            $query->where(function ($query) use ($search) {
+                $query->where('username', 'like', '%'.$search.'%')
+                    ->orWhere('email', 'like', '%'.$search.'%');
+            });
+        });
     }
 }

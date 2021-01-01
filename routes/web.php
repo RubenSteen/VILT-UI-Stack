@@ -27,10 +27,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/inertia', function () {
     return Inertia\Inertia::render('Landing');
 })->name('home');
 
@@ -39,8 +35,6 @@ Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm'
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home'); // Can be deleted soon
 
 /*
 |--------------------------------------------------------------------------
@@ -78,13 +72,22 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify')->middleware(['signed', 'throttle:6,1']);
     Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend')->middleware('throttle:6,1');
 
+    // Profile routes
+    Route::get('profile', ['as' => 'profile.edit',   'uses' => 'ProfileController@edit', 'middleware' => ['password.confirm']]);
+    Route::patch('profile', ['as' => 'profile.update',    'uses' => 'ProfileController@update', 'middleware' => ['password.confirm']]);
     /*
     |--------------------------------------------------------------------------
     | Admin Routes
     |--------------------------------------------------------------------------
     |
     */
-    Route::group(['middleware' => ['web'], 'namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], function () {
-        //..
+    Route::group(['middleware' => ['admin'], 'namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], function () {
+
+        // User routes
+        Route::get('users', ['as' => 'user.index',    'uses' => 'UserController@index']);
+        Route::get('user/{user_username}', ['as' => 'user.show',    'uses' => 'UserController@show']);
+        Route::delete('user/{user_username}', ['as' => 'user.delete',   'uses' => 'UserController@delete']);
+        Route::put('user/{user_username}', ['as' => 'user.restore', 'uses' => 'UserController@restore']);
+
     });
 });
