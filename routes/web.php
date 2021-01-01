@@ -88,6 +88,5 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('user/{user_username}', ['as' => 'user.show',    'uses' => 'UserController@show']);
         Route::delete('user/{user_username}', ['as' => 'user.delete',   'uses' => 'UserController@delete']);
         Route::put('user/{user_username}', ['as' => 'user.restore', 'uses' => 'UserController@restore']);
-
     });
 });

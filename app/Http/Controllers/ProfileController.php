@@ -6,8 +6,8 @@ use App\Http\Requests\User\UserUpdate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Inertia\Inertia;
 use Illuminate\Support\Facades\Validator;
+use Inertia\Inertia;
 
 class ProfileController extends Controller
 {

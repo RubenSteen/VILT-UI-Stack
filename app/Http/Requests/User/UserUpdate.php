@@ -67,7 +67,7 @@ class UserUpdate extends FormRequest
 
         // Filter the required attribute out of the password array
         $rules['password'] = Arr::where($rules['password'], function ($value, $key) {
-                return $value !== 'required';
+            return $value !== 'required';
         });
 
         $rules['password'][] = 'nullable'; // Add the nullable attribute to the password array
