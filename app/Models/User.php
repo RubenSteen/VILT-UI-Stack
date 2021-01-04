@@ -36,7 +36,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     /**
      * The attributes that should be cast to native types.
-     *
+     *e
      * @var array
      */
     protected $casts = [
@@ -51,16 +51,18 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function scopeFilter($query, array $filters)
     {
-        $query->when($filters['trashed'] ?? null, function ($query, $trashed) {
-            if ($trashed === 'with') {
+        $query->when($filters['trashed'] ?? null, function ($query, $value) {
+            if ($value === 'with') {
                 $query->withTrashed();
-            } elseif ($trashed === 'only') {
+            } elseif ($value === 'only') {
                 $query->onlyTrashed();
             }
-        })->when($filters['email_verified'] ?? null, function ($query) {
-            $query->whereNotNull('email_verified_at');
-        })->when($filters['email_not_verified'] ?? null, function ($query) {
-            $query->where('email_verified_at', null);
+        })->when($filters['verified_email'] ?? null, function ($query, $value) {
+            if ($value === 'yes') {
+                $query->whereNotNull('email_verified_at');
+            } elseif ($value === 'no') {
+                $query->where('email_verified_at', null);
+            }
         });
     }
 

@@ -24,7 +24,10 @@ class UserController extends AdminBaseController
 
         $search = Request::get('search');
 
-        $filters = Request::all('trashed', 'email_verified', 'email_not_verified');
+        $filters = Request::all('trashed', 'verified_email');
+
+        $filters['trashed'] = ($filters['trashed'] != "") ? $filters['trashed'] : ""; // Sets select box to empty string if no value is selected.
+        $filters['verified_email'] = ($filters['verified_email'] != "") ? $filters['verified_email'] : ""; // Sets select box to empty string if no value is selected.
 
         return Inertia::render('User/Admin/Index', [
             'filters' => $filters,
