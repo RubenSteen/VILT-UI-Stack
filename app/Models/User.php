@@ -36,7 +36,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     /**
      * The attributes that should be cast to native types.
-     *e
+     *e.
      * @var array
      */
     protected $casts = [
