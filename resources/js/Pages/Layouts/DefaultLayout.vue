@@ -115,7 +115,7 @@
                                 </nav>
                             </div>
                             <div class="flex-shrink-0 flex border-t border-gray-200 p-4">
-                                <a href="#" class="flex-shrink-0 group block">
+                                <div class="flex-shrink-0 w-full group block">
                                     <div v-if="$page.props.auth.user !== null" class="flex items-center">
                                         <div>
                                             <img
@@ -134,6 +134,11 @@
                                             >
                                                 View profile
                                             </inertia-link>
+                                        </div>
+                                        <div @click="logout()" class="cursor-pointer ml-auto">
+                                            <svg class="text-red-500 h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                            </svg>
                                         </div>
                                     </div>
                                     <inertia-link v-else :href="route('login')" class="flex items-center">
@@ -157,7 +162,7 @@
                                             </p>
                                         </div>
                                     </inertia-link>
-                                </a>
+                                </div>
                             </div>
                         </div>
                     </transition>
@@ -208,7 +213,7 @@
                             </nav>
                         </div>
                         <div class="flex-shrink-0 flex border-t border-gray-200 p-4">
-                            <a href="#" class="flex-shrink-0 w-full group block">
+                            <div class="flex-shrink-0 w-full group block">
                                 <div v-if="$page.props.auth.user !== null" class="flex items-center">
                                     <div>
                                         <img
@@ -227,6 +232,11 @@
                                         >
                                             View profile
                                         </inertia-link>
+                                    </div>
+                                    <div @click="logout()" class="cursor-pointer ml-auto">
+                                        <svg class="text-red-500 h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                        </svg>
                                     </div>
                                 </div>
                                 <inertia-link v-else :href="route('login')" class="flex items-center">
@@ -250,7 +260,7 @@
                                         </p>
                                     </div>
                                 </inertia-link>
-                            </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -308,6 +318,14 @@ export default {
         return {
             showSidebar: false,
         };
+    },
+
+    methods: {
+        logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                this.$inertia.post(this.route('logout'))
+            }
+        },
     },
 };
 </script>

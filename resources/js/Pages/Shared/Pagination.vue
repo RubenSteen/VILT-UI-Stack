@@ -107,15 +107,6 @@ export default {
         links: Array,
     },
 
-    methods: {
-        transformNullURL(url) {
-            if (url !== null) {
-                return url;
-            }
-            return '#';
-        },
-    },
-
     computed: {
         getNextPage() {
             return this.links[this.links.length - 1];

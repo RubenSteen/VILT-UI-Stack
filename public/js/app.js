@@ -4443,6 +4443,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'DefaultLayout',
@@ -4456,6 +4466,13 @@ __webpack_require__.r(__webpack_exports__);
     return {
       showSidebar: false
     };
+  },
+  methods: {
+    logout: function logout() {
+      if (confirm('Are you sure you want to logout?')) {
+        this.$inertia.post(this.route('logout'));
+      }
+    }
   }
 });
 
@@ -5086,15 +5103,6 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     links: Array
   },
-  methods: {
-    transformNullURL: function transformNullURL(url) {
-      if (url !== null) {
-        return url;
-      }
-
-      return '#';
-    }
-  },
   computed: {
     getNextPage: function getNextPage() {
       return this.links[this.links.length - 1];
@@ -5225,34 +5233,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -5647,9 +5627,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "Show",
+  name: 'Show',
   components: {
     Layout: _Layouts_DefaultLayout__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
@@ -49313,11 +49303,8 @@ var render = function() {
                       },
                       [
                         _c(
-                          "a",
-                          {
-                            staticClass: "flex-shrink-0 group block",
-                            attrs: { href: "#" }
-                          },
+                          "div",
+                          { staticClass: "flex-shrink-0 w-full group block" },
                           [
                             _vm.$page.props.auth.user !== null
                               ? _c(
@@ -49375,6 +49362,44 @@ var render = function() {
                                         )
                                       ],
                                       1
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "cursor-pointer ml-auto",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.logout()
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "svg",
+                                          {
+                                            staticClass: "text-red-500 h-6 w-6",
+                                            attrs: {
+                                              xmlns:
+                                                "http://www.w3.org/2000/svg",
+                                              fill: "none",
+                                              viewBox: "0 0 24 24",
+                                              stroke: "currentColor"
+                                            }
+                                          },
+                                          [
+                                            _c("path", {
+                                              attrs: {
+                                                "stroke-linecap": "round",
+                                                "stroke-linejoin": "round",
+                                                "stroke-width": "2",
+                                                d:
+                                                  "M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                                              }
+                                            })
+                                          ]
+                                        )
+                                      ]
                                     )
                                   ]
                                 )
@@ -49533,11 +49558,8 @@ var render = function() {
                 },
                 [
                   _c(
-                    "a",
-                    {
-                      staticClass: "flex-shrink-0 w-full group block",
-                      attrs: { href: "#" }
-                    },
+                    "div",
+                    { staticClass: "flex-shrink-0 w-full group block" },
                     [
                       _vm.$page.props.auth.user !== null
                         ? _c("div", { staticClass: "flex items-center" }, [
@@ -49589,6 +49611,43 @@ var render = function() {
                                 )
                               ],
                               1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "cursor-pointer ml-auto",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.logout()
+                                  }
+                                }
+                              },
+                              [
+                                _c(
+                                  "svg",
+                                  {
+                                    staticClass: "text-red-500 h-6 w-6",
+                                    attrs: {
+                                      xmlns: "http://www.w3.org/2000/svg",
+                                      fill: "none",
+                                      viewBox: "0 0 24 24",
+                                      stroke: "currentColor"
+                                    }
+                                  },
+                                  [
+                                    _c("path", {
+                                      attrs: {
+                                        "stroke-linecap": "round",
+                                        "stroke-linejoin": "round",
+                                        "stroke-width": "2",
+                                        d:
+                                          "M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                                      }
+                                    })
+                                  ]
+                                )
+                              ]
                             )
                           ])
                         : _c(
@@ -51080,22 +51139,6 @@ var render = function() {
                       )
                     ]
                   )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "mt-4 flex sm:mt-0 sm:ml-4" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass:
-                        "order-0 inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:order-1 sm:ml-3",
-                      attrs: { type: "button" }
-                    },
-                    [
-                      _vm._v(
-                        "\n                                    Create\n                                "
-                      )
-                    ]
-                  )
                 ])
               ]
             ),
@@ -51814,11 +51857,7 @@ var render = function() {
                               staticClass:
                                 "text-lg leading-6 font-medium text-gray-900"
                             },
-                            [
-                              _vm._v(
-                                "\n                                        Information\n                                    "
-                              )
-                            ]
+                            [_vm._v("Information")]
                           )
                         ]),
                         _vm._v(" "),
@@ -51840,11 +51879,7 @@ var render = function() {
                                       staticClass:
                                         "text-sm font-medium text-gray-500"
                                     },
-                                    [
-                                      _vm._v(
-                                        "\n                                                Name\n                                            "
-                                      )
-                                    ]
+                                    [_vm._v("Name")]
                                   ),
                                   _vm._v(" "),
                                   _c(
@@ -51875,11 +51910,7 @@ var render = function() {
                                       staticClass:
                                         "text-sm font-medium text-gray-500"
                                     },
-                                    [
-                                      _vm._v(
-                                        "\n                                                Photo\n                                            "
-                                      )
-                                    ]
+                                    [_vm._v("Photo")]
                                   ),
                                   _vm._v(" "),
                                   _c(
@@ -51917,11 +51948,7 @@ var render = function() {
                                       staticClass:
                                         "text-sm font-medium text-gray-500"
                                     },
-                                    [
-                                      _vm._v(
-                                        "\n                                                Email\n                                            "
-                                      )
-                                    ]
+                                    [_vm._v("Email")]
                                   ),
                                   _vm._v(" "),
                                   _c(
@@ -51963,11 +51990,7 @@ var render = function() {
                                       staticClass:
                                         "text-sm font-medium text-gray-500"
                                     },
-                                    [
-                                      _vm._v(
-                                        "\n                                                Created\n                                            "
-                                      )
-                                    ]
+                                    [_vm._v("Created")]
                                   ),
                                   _vm._v(" "),
                                   _c(
@@ -51998,11 +52021,7 @@ var render = function() {
                                       staticClass:
                                         "text-sm font-medium text-gray-500"
                                     },
-                                    [
-                                      _vm._v(
-                                        "\n                                                Last update\n                                            "
-                                      )
-                                    ]
+                                    [_vm._v("Last update")]
                                   ),
                                   _vm._v(" "),
                                   _c(
@@ -52036,21 +52055,13 @@ var render = function() {
                               staticClass:
                                 "text-lg leading-6 font-medium text-gray-900"
                             },
-                            [
-                              _vm._v(
-                                "\n                                        Actionsc\n                                    "
-                              )
-                            ]
+                            [_vm._v("Actionsc")]
                           ),
                           _vm._v(" "),
                           _c(
                             "p",
                             { staticClass: "max-w-2xl text-sm text-gray-500" },
-                            [
-                              _vm._v(
-                                "\n                                        Manage the users account.\n                                    "
-                              )
-                            ]
+                            [_vm._v("Manage the users account.")]
                           )
                         ]),
                         _vm._v(" "),
