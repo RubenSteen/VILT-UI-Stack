@@ -26,8 +26,8 @@ class UserController extends AdminBaseController
 
         $filters = Request::all('trashed', 'verified_email');
 
-        $filters['trashed'] = ($filters['trashed'] != "") ? $filters['trashed'] : ""; // Sets select box to empty string if no value is selected.
-        $filters['verified_email'] = ($filters['verified_email'] != "") ? $filters['verified_email'] : ""; // Sets select box to empty string if no value is selected.
+        $filters['trashed'] = ($filters['trashed'] != '') ? $filters['trashed'] : ''; // Sets select box to empty string if no value is selected.
+        $filters['verified_email'] = ($filters['verified_email'] != '') ? $filters['verified_email'] : ''; // Sets select box to empty string if no value is selected.
 
         return Inertia::render('User/Admin/Index', [
             'filters' => $filters,
