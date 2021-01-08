@@ -11,12 +11,13 @@ use Inertia\Inertia;
 
 class ProfileController extends Controller
 {
+
     /**
      * Show the form for editing the authenticated user.
      *
      * @return \Inertia\Response
      */
-    public function edit()
+    public function __invoke()
     {
         return Inertia::render('Profile/Edit', [
             'username' => Auth::user()->username,

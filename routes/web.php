@@ -73,7 +73,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend')->middleware('throttle:6,1');
 
     // Profile routes
-    Route::get('profile', ['as' => 'profile.edit',   'uses' => 'ProfileController@edit', 'middleware' => ['password.confirm']]);
+    Route::get('profile', ['as' => 'profile.edit',   'uses' => 'ProfileController', 'middleware' => ['password.confirm']]);
     Route::patch('profile', ['as' => 'profile.update',    'uses' => 'ProfileController@update', 'middleware' => ['password.confirm']]);
     /*
     |--------------------------------------------------------------------------

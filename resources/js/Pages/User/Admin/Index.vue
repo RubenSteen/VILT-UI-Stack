@@ -1,7 +1,7 @@
 <template>
     <layout :title="title">
         <div class="">
-            <div class="h-screen flex overflow-hidden bg-white">
+            <div class="h-screen flex overflow-hidden">
 
                     <main class="flex-1 relative z-0 overflow-y-auto focus:outline-none" tabindex="0">
                         <!-- Page title & actions -->

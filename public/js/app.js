@@ -4453,6 +4453,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'DefaultLayout',
@@ -49056,7 +49078,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("master-layout", { attrs: { title: _vm.title } }, [
-    _c("div", { staticClass: "h-screen flex overflow-hidden bg-gray-100" }, [
+    _c("div", { staticClass: "h-screen flex overflow-hidden" }, [
       _c("div", { staticClass: "md:hidden" }, [
         _c(
           "div",
@@ -49135,7 +49157,7 @@ var render = function() {
                       }
                     ],
                     staticClass:
-                      "relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-white"
+                      "relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-gray-50"
                   },
                   [
                     _c(
@@ -49476,7 +49498,7 @@ var render = function() {
             "div",
             {
               staticClass:
-                "flex flex-col h-0 flex-1 border-r border-gray-200 bg-white"
+                "flex flex-col h-0 flex-1 border-r border-gray-200 bg-gray-50"
             },
             [
               _c(
@@ -49505,7 +49527,7 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "nav",
-                    { staticClass: "mt-5 flex-1 px-2 bg-white space-y-1" },
+                    { staticClass: "mt-5 flex-1 px-2 bg-gray-50 space-y-1" },
                     [
                       _c(
                         "inertia-link",
@@ -49755,7 +49777,7 @@ var render = function() {
           "main",
           {
             staticClass:
-              "flex-1 relative z-0 overflow-y-auto focus:outline-none",
+              "flex-1 relative z-0 overflow-y-auto focus:outline-none bg-white",
             attrs: { tabindex: "0" }
           },
           [_vm._t("default")],
@@ -51108,7 +51130,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("layout", { attrs: { title: _vm.title } }, [
     _c("div", {}, [
-      _c("div", { staticClass: "h-screen flex overflow-hidden bg-white" }, [
+      _c("div", { staticClass: "h-screen flex overflow-hidden" }, [
         _c(
           "main",
           {
@@ -61923,7 +61945,8 @@ __webpack_require__.r(__webpack_exports__);
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // require('./tailwindDarkMode');
+
 
 
 
