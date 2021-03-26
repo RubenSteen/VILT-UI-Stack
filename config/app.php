@@ -54,6 +54,8 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
+    'dev_url' => env('APP_DEV_URL', false), # URL used to bypass forced HTTPS that is enforced in the AppServiceProvider Boot method
+
     'asset_url' => env('ASSET_URL', null),
 
     /*
