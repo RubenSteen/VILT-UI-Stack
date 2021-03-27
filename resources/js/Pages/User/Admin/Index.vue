@@ -23,7 +23,7 @@
                                                 Verified email
                                             </label>
                                             <div class="mt-1">
-                                                <select v-model="filtersForm.verified_email" id="trashed" name="trashed" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                                <select v-model="filtersForm.verified_email" id="verified_email" name="verified_email" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
                                                     <option value="">Both</option>
                                                     <option value="yes">Yes</option>
                                                     <option value="no">No</option>

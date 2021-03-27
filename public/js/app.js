@@ -54413,7 +54413,10 @@ var render = function() {
                                   ],
                                   staticClass:
                                     "mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md",
-                                  attrs: { id: "trashed", name: "trashed" },
+                                  attrs: {
+                                    id: "verified_email",
+                                    name: "verified_email"
+                                  },
                                   on: {
                                     change: function($event) {
                                       var $$selectedVal = Array.prototype.filter
