@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\User;
+use Illuminate\Database\Seeder;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
@@ -19,12 +19,11 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        ini_set('memory_limit','1024M');
+        ini_set('memory_limit', '1024M');
 
         $userData = $this->createUsers();
 
         $this->importUsers($userData);
-
 
         // Outputs the amount of users in the database
         $importedUsers = User::count();
@@ -37,7 +36,7 @@ class UserSeeder extends Seeder
         $this->command->info("Creating array of {$this->createAmount} users");
         $this->command->getOutput()->progressStart($this->createAmount);
 
-        for ($ii=0; $ii < $this->createAmount; $ii++) {
+        for ($ii = 0; $ii < $this->createAmount; $ii++) {
             $userData[] = User::factory()->raw();
 
             $this->command->getOutput()->progressAdvance();

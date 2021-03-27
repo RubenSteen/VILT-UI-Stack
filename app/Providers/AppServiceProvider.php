@@ -27,12 +27,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
-        if (config('app.dev_url') !== request()->root())
-        {
+        if (config('app.dev_url') !== request()->root()) {
             \URL::forceScheme('https'); // Force HTTPS
         }
-
     }
 
     protected function registerLengthAwarePaginator()
@@ -79,7 +76,7 @@ class AppServiceProvider extends ServiceProvider
                         if (is_array($item)) {
                             return Collection::make($item)->map(function ($url, $page) {
                                 return [
-                                    'url' => (config('app.dev_url') !== request()->root()) ? str_replace("http","https", $url) : $url,
+                                    'url' => (config('app.dev_url') !== request()->root()) ? str_replace('http', 'https', $url) : $url,
                                     'label' => $page,
                                     'active' => $this->currentPage() === $page,
                                 ];
