@@ -27,12 +27,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
-        if (config('app.dev_url') !== request()->root())
-        {
+        if (config('app.dev_url') !== request()->root()) {
             \URL::forceScheme('https'); // Force HTTPS
         }
-
     }
 
     protected function registerLengthAwarePaginator()
