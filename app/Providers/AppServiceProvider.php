@@ -79,7 +79,7 @@ class AppServiceProvider extends ServiceProvider
                         if (is_array($item)) {
                             return Collection::make($item)->map(function ($url, $page) {
                                 return [
-                                    'url' => $url,
+                                    'url' => (config('app.dev_url') !== request()->root()) ? str_replace("http","https", $url) : $url,
                                     'label' => $page,
                                     'active' => $this->currentPage() === $page,
                                 ];
