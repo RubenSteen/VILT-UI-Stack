@@ -7440,6 +7440,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.filtersForm = lodash_mapValues__WEBPACK_IMPORTED_MODULE_4___default()(this.filtersForm, function () {
         return null;
       });
+      this.isFilterActive();
       this.submitSearchAndFilters();
     },
     applyFilters: function applyFilters() {

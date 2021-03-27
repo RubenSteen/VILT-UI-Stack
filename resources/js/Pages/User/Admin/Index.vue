@@ -258,6 +258,7 @@ export default {
 
         resetFilters() {
             this.filtersForm = mapValues(this.filtersForm, () => null)
+            this.isFilterActive();
             this.submitSearchAndFilters();
         },
 
