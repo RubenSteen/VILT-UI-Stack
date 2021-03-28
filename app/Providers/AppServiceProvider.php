@@ -57,8 +57,22 @@ class AppServiceProvider extends ServiceProvider
                 {
                     return [
                         'data' => $this->items->toArray(),
-                        'links' => $this->links(),
+                        'links' => $this->httpToHttps(),
                     ];
+                }
+
+                public function httpToHttps()
+                {
+                    return $this->links()->map(function ($link, $key) {
+
+                        $newLink = null;
+
+                        if ($link['url'] !== null) {
+                            $newLink = (config('app.dev_url') !== request()->root()) ? str_replace("http","https", $link['url']) : $link['url'];
+                        }
+
+                        return array_replace($link, ['url' => $newLink]);
+                    });
                 }
 
                 public function links($view = null, $data = [])
@@ -79,7 +93,7 @@ class AppServiceProvider extends ServiceProvider
                         if (is_array($item)) {
                             return Collection::make($item)->map(function ($url, $page) {
                                 return [
-                                    'url' => (config('app.dev_url') !== request()->root()) ? str_replace("http","https", $url) : $url,
+                                    'url' => $url,
                                     'label' => $page,
                                     'active' => $this->currentPage() === $page,
                                 ];
