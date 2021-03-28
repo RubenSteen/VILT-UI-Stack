@@ -58,6 +58,7 @@ class UserSeeder extends Seeder
         $this->command->getOutput()->progressStart($this->createAmount);
 
         foreach ($chunks as $chunk) {
+            // This will not trigger any model events (observers)
             User::insert($chunk);
 
             $this->command->getOutput()->progressAdvance($this->chunkAmount);
