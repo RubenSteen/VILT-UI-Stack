@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use Illuminate\Support\Facades\Artisan;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
@@ -25,6 +26,7 @@ class UserSeeder extends Seeder
 
         $this->importUsers($userData);
 
+        Artisan::call('users:new-current-month', ['--no-interaction' => true]);
 
         // Outputs the amount of users in the database
         $importedUsers = User::count();

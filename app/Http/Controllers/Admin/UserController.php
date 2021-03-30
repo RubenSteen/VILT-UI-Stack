@@ -6,6 +6,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Request;
 use Inertia\Inertia;
 
@@ -33,7 +34,7 @@ class UserController extends AdminBaseController
             'stats' => [
                 'newUsersMonthly' => [
                     'month' => $dateTime->firstOfMonth()->format('F'),
-                    'amount' => User::where('created_at', '>', $dateTime->firstOfMonth())->count(),
+                    'amount' => readable_number(Redis::get('new-users-current-month')),
                 ],
             ],
             'users' => User::orderByDesc('id')

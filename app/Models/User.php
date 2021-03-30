@@ -8,10 +8,30 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Traits\UsesUuid;
+use Illuminate\Support\Facades\Redis;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable, SoftDeletes, UsesUuid;
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::created(function ($user) {
+            Redis::incr('new-users-current-month');
+        });
+
+
+        static::deleted(function ($user) {
+            if ($user->created_at >= now()->startOfMonth()) {
+                Redis::decr('new-users-current-month');
+            }
+        });
+    }
 
     /**
      * The attributes that are mass assignable.
