@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
+use App\Traits\UsesUuid;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\Traits\UsesUuid;
 use Illuminate\Support\Facades\Redis;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -24,7 +24,6 @@ class User extends Authenticatable implements MustVerifyEmail
         static::created(function ($user) {
             Redis::incr('new-users-current-month');
         });
-
 
         static::deleted(function ($user) {
             if ($user->created_at >= now()->startOfMonth()) {

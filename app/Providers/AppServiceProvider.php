@@ -27,12 +27,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
-        if (config('app.dev_url') !== request()->root())
-        {
+        if (config('app.dev_url') !== request()->root()) {
             \URL::forceScheme('https'); // Force HTTPS
         }
-
     }
 
     protected function registerLengthAwarePaginator()
@@ -64,11 +61,10 @@ class AppServiceProvider extends ServiceProvider
                 public function httpToHttps()
                 {
                     return $this->links()->map(function ($link, $key) {
-
                         $newLink = null;
 
                         if ($link['url'] !== null) {
-                            $newLink = (config('app.dev_url') !== request()->root()) ? str_replace("http","https", $link['url']) : $link['url'];
+                            $newLink = (config('app.dev_url') !== request()->root()) ? str_replace('http', 'https', $link['url']) : $link['url'];
                         }
 
                         return array_replace($link, ['url' => $newLink]);
