@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\User\UserUpdate;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 
 class UserController extends AdminBaseController
@@ -48,6 +46,7 @@ class UserController extends AdminBaseController
                         'username' => $user->username,
                         'email' => $user->email,
                         'email_verified_at' => ($user->email_verified_at) ? "verified {$user->email_verified_at->diffForHumans()}" : 'not verified',
+                        'last_seen' => 'Is not being tracked',
                         'isAdmin' => $user->isAdmin(),
                     ];
                 }),

@@ -7380,6 +7380,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -54741,19 +54747,6 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                            ID\n                                        "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          {
-                            staticClass:
-                              "px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                          },
-                          [
-                            _vm._v(
                               "\n                                            Username\n                                        "
                             )
                           ]
@@ -54768,6 +54761,19 @@ var render = function() {
                           [
                             _vm._v(
                               "\n                                            Email\n                                        "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "th",
+                          {
+                            staticClass:
+                              "hidden md:table-cell px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                          },
+                          [
+                            _vm._v(
+                              "\n                                            Last seen\n                                        "
                             )
                           ]
                         ),
@@ -54808,30 +54814,6 @@ var render = function() {
                                   "td",
                                   {
                                     staticClass:
-                                      "px-6 py-3 whitespace-nowrap text-sm font-medium text-gray-900"
-                                  },
-                                  [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "flex items-center space-x-3 lg:pl-2"
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                                                " +
-                                            _vm._s(user.id) +
-                                            "\n                                            "
-                                        )
-                                      ]
-                                    )
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "td",
-                                  {
-                                    staticClass:
                                       "px-6 py-3 text-sm text-gray-500 font-medium"
                                   },
                                   [
@@ -54867,6 +54849,21 @@ var render = function() {
                                         [_vm._v(_vm._s(user.email_verified_at))]
                                       )
                                     ])
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  {
+                                    staticClass:
+                                      "hidden md:table-cell px-6 py-3 whitespace-nowrap text-sm text-gray-500 text-left"
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                            " +
+                                        _vm._s(user.last_seen) +
+                                        "\n                                        "
+                                    )
                                   ]
                                 ),
                                 _vm._v(" "),
