@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\User;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
 
 class NewUsersCurrentMonth extends Command
@@ -48,8 +49,12 @@ class NewUsersCurrentMonth extends Command
      */
     public function handle()
     {
+        $this->info('Running command \'users:new-current-month\'');
+
         $amount = User::where('created_at', '>=', $this->startOfMonth)->count();
 
         Redis::set('new-users-current-month', $amount);
+
+        $this->info('Finished running command \'users:new-current-month\'');
     }
 }

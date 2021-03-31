@@ -5,6 +5,8 @@ namespace App\Console;
 use App\Console\Commands\NewUsersCurrentMonth;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Redis;
 
 class Kernel extends ConsoleKernel
 {
