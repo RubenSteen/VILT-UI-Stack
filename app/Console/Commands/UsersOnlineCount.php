@@ -38,7 +38,7 @@ class UsersOnlineCount extends Command
      */
     public function handle()
     {
-        $count = count(Redis::keys("users:online:*"));
+        $count = count(Redis::keys('users:online:*'));
 
         $this->info('Users currently online: '.$count);
 

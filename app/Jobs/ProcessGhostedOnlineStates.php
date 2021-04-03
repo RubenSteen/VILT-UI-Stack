@@ -33,11 +33,9 @@ class ProcessGhostedOnlineStates implements ShouldQueue
      */
     public function handle()
     {
-        User::whereNull('last_active_at')->chunk(100, function($users)
-        {
-            foreach ($users as $user)
-            {
-                if (! Redis::exists('users:online:'.$user->id)){
+        User::whereNull('last_active_at')->chunk(100, function ($users) {
+            foreach ($users as $user) {
+                if (! Redis::exists('users:online:'.$user->id)) {
                     $user->goesOffline(now()->subSeconds(config('user.online.expire')), true);
                 }
             }

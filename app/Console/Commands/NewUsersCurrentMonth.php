@@ -20,12 +20,12 @@ class NewUsersCurrentMonth extends Command
      *
      * @var string
      */
-    protected $description = "Get the amount of newly created users for the current month runs once per day";
+    protected $description = 'Get the amount of newly created users for the current month runs once per day';
 
     /**
      * Carbon instance of the start of the month.
      *
-     * @var Object
+     * @var object
      */
     protected $startOfMonth;
 
