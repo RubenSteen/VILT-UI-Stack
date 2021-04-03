@@ -40,6 +40,7 @@ class Kernel extends HttpKernel
 
             //..
             \App\Http\Middleware\HandleInertiaRequests::class, // Has to be the last item (https://inertiajs.com/server-side-setup)
+            \App\Http\Middleware\TrackOnlineStatus::class, // https://ryangjchandler.co.uk/articles/track-your-users-last-activity-in-laravel
         ],
 
         'api' => [

@@ -3,6 +3,8 @@
 namespace App\Console;
 
 use App\Console\Commands\NewUsersCurrentMonth;
+use App\Jobs\ProcessGhostedOnlineStates;
+use App\Jobs\ProcessOnlineStatus;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Illuminate\Support\Facades\Log;
@@ -28,6 +30,10 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command(NewUsersCurrentMonth::class)->dailyAt('2:00');
+
+        $schedule->job(new ProcessOnlineStatus)->everyMinute();
+
+        $schedule->job(new ProcessGhostedOnlineStates)->everyTenMinutes();
     }
 
     /**
