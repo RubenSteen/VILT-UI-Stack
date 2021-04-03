@@ -27,7 +27,7 @@ class ProcessOnlineStatus implements ShouldQueue
     {
         $this->expiredAt = now()->subSeconds(config('user.online.expire'));
 
-        $recentlySeenRawKeys = Redis::keys("users:online:*");
+        $recentlySeenRawKeys = Redis::keys('users:online:*');
 
         $recentlySeenKeys = preg_replace('/'.config('database.redis.options.prefix').'/', '', $recentlySeenRawKeys); // Removing laravel redis prefix
 
