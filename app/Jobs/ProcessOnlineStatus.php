@@ -8,13 +8,14 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
 
 class ProcessOnlineStatus implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    private $recentlySeenEncoded;
+    private $recentlySeenKeys;
 
     private $expiredAt;
 
@@ -27,11 +28,9 @@ class ProcessOnlineStatus implements ShouldQueue
     {
         $this->expiredAt = now()->subSeconds(config('user.online.expire'));
 
-        $recentlySeenRawKeys = Redis::keys('users:online:*');
+        $recentlySeenRawKeys = Redis::keys(config('redis.keys.users.online') . ':*');
 
-        $recentlySeenKeys = preg_replace('/'.config('database.redis.options.prefix').'/', '', $recentlySeenRawKeys); // Removing laravel redis prefix
-
-        $this->recentlySeenEncoded = Redis::mget($recentlySeenKeys);
+        $this->recentlySeenKeys = preg_replace('/'.config('database.redis.options.prefix').'/', '', $recentlySeenRawKeys); // Removing laravel redis prefix
     }
 
     /**
@@ -41,11 +40,17 @@ class ProcessOnlineStatus implements ShouldQueue
      */
     public function handle()
     {
-        foreach ($this->recentlySeenEncoded as $encodedUser) {
-            $cachedUser = json_decode($encodedUser); // Decode the JSON stored in the cache
+        Log::notice('Running ProcessOnlineStatus');
 
-            if ($this->expiredAt > $cachedUser->last_active_at) {
-                User::find($cachedUser->id)->goesOffline($cachedUser->last_active_at);
+        if (count($this->recentlySeenKeys) > 0) {
+            $recentlySeenEncoded = Redis::mget($this->recentlySeenKeys);
+
+            foreach ($recentlySeenEncoded as $encodedUser) {
+                $cachedUser = json_decode($encodedUser); // Decode the JSON stored in the cache
+
+                if ($this->expiredAt > $cachedUser->last_active_at) {
+                    User::find($cachedUser->id)->goesOffline($cachedUser->last_active_at);
+                }
             }
         }
     }

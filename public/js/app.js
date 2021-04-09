@@ -7386,6 +7386,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -54560,6 +54572,61 @@ var render = function() {
                         "div",
                         {
                           staticClass:
+                            "flex-shrink-0 flex items-center justify-center w-16 bg-green-600 text-white text-sm font-medium rounded-l-md"
+                        },
+                        [
+                          _vm._v(
+                            "\n                                        " +
+                              _vm._s(_vm.stats.usersOnline) +
+                              "\n                                    "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "flex-1 flex items-center justify-between border-t border-r border-b border-gray-200 bg-white rounded-r-md truncate"
+                        },
+                        [
+                          _c(
+                            "div",
+                            {
+                              staticClass: "flex-1 px-4 py-2 text-sm truncate"
+                            },
+                            [
+                              _c(
+                                "a",
+                                {
+                                  staticClass:
+                                    "text-gray-900 font-medium hover:text-gray-600",
+                                  attrs: { href: "#" }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                                Users online\n                                            "
+                                  )
+                                ]
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    {
+                      staticClass:
+                        "relative col-span-1 flex shadow-sm rounded-md"
+                    },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
                             "flex-shrink-0 flex items-center justify-center w-16 bg-pink-600 text-white text-sm font-medium rounded-l-md"
                         },
                         [
@@ -54773,7 +54840,7 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                            Last seen\n                                        "
+                              "\n                                            Last active at\n                                        "
                             )
                           ]
                         ),
@@ -54861,7 +54928,7 @@ var render = function() {
                                   [
                                     _vm._v(
                                       "\n                                            " +
-                                        _vm._s(user.last_seen) +
+                                        _vm._s(user.last_active_at) +
                                         "\n                                        "
                                     )
                                   ]

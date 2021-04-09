@@ -53,6 +53,18 @@
                         <div class="px-4 mt-6 sm:px-6 lg:px-8">
                             <ul class="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 xl:grid-cols-4 mt-3">
                                 <li class="relative col-span-1 flex shadow-sm rounded-md">
+                                    <div class="flex-shrink-0 flex items-center justify-center w-16 bg-green-600 text-white text-sm font-medium rounded-l-md">
+                                        {{ stats.usersOnline }}
+                                    </div>
+                                    <div class="flex-1 flex items-center justify-between border-t border-r border-b border-gray-200 bg-white rounded-r-md truncate">
+                                        <div class="flex-1 px-4 py-2 text-sm truncate">
+                                            <a href="#" class="text-gray-900 font-medium hover:text-gray-600">
+                                                Users online
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="relative col-span-1 flex shadow-sm rounded-md">
                                     <div class="flex-shrink-0 flex items-center justify-center w-16 bg-pink-600 text-white text-sm font-medium rounded-l-md">
                                         {{ stats.newUsersMonthly.amount }}
                                     </div>
@@ -114,7 +126,7 @@
                                             Email
                                         </th>
                                         <th class="hidden md:table-cell px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Last seen
+                                            Last active at
                                         </th>
                                         <th class="hidden md:table-cell px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Admin
@@ -142,7 +154,7 @@
                                           </span>
                                         </td>
                                         <td class="hidden md:table-cell px-6 py-3 whitespace-nowrap text-sm text-gray-500 text-left">
-                                            {{ user.last_seen }}
+                                            {{ user.last_active_at }}
                                         </td>
                                         <td class="hidden md:table-cell px-6 pl-10 py-3 whitespace-nowrap text-sm text-gray-500 text-left">
                                             <span class="flex items-center truncate space-x-3">

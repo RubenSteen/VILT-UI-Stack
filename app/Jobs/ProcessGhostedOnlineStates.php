@@ -10,6 +10,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
 
 class ProcessGhostedOnlineStates implements ShouldQueue
@@ -33,16 +34,16 @@ class ProcessGhostedOnlineStates implements ShouldQueue
      */
     public function handle()
     {
+        Log::notice('Running ProcessGhostedOnlineStatus');
+
         User::whereNull('last_active_at')->chunk(100, function ($users) {
             foreach ($users as $user) {
-                if (! Redis::exists('users:online:'.$user->id)) {
+                if (! Redis::exists(config('redis.keys.users.online') . ':' . $user->id)) {
                     $user->goesOffline(now()->subSeconds(config('user.online.expire')), true);
                 }
             }
         });
 
-        $count = Artisan::call('users:online-count');
-
-        Redis::set('users:online_count', $count);
+        Artisan::call('users:online-count'); // Will update Redis
     }
 }

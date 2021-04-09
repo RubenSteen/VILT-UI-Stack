@@ -7,8 +7,8 @@ use App\Jobs\ProcessGhostedOnlineStates;
 use App\Jobs\ProcessOnlineStatus;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Redis;
 
 class Kernel extends ConsoleKernel
 {
@@ -29,6 +29,12 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        if (App::environment('local')) {
+            $schedule->call(function () {
+                Log::notice('Confirmation that cron has ran laravel scheduler (this will log every minute)');
+            })->everyMinute();
+        }
+
         $schedule->command(NewUsersCurrentMonth::class)->dailyAt('2:00');
 
         $schedule->job(new ProcessOnlineStatus)->everyMinute();

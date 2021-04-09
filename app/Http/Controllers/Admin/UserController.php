@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Request;
 use Inertia\Inertia;
@@ -35,8 +36,9 @@ class UserController extends AdminBaseController
             'stats' => [
                 'newUsersMonthly' => [
                     'month' => $dateTime->firstOfMonth()->format('F'),
-                    'amount' => readable_number(Redis::get('new-users-current-month')),
+                    'amount' => readable_number(Redis::get(config('redis.keys.users.new_current_month'), Artisan::call('users:new-current-month'))),
                 ],
+                'usersOnline' => readable_number(Redis::get(config('redis.keys.users.online_count'), Artisan::call('users:online-count')))
             ],
             'users' => User::orderByDesc('id')
                 ->filter($filters)
@@ -48,7 +50,7 @@ class UserController extends AdminBaseController
                         'username' => $user->username,
                         'email' => $user->email,
                         'email_verified_at' => ($user->email_verified_at) ? "verified {$user->email_verified_at->diffForHumans()}" : 'not verified',
-                        'last_seen' => $user->last_seen_at,
+                        'last_active_at' => $user->last_active_at->toDateTimeString(),
                         'isAdmin' => $user->isAdmin(),
                     ];
                 }),

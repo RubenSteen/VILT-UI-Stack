@@ -23,16 +23,19 @@ class User extends Authenticatable implements MustVerifyEmail
     protected static function booted()
     {
         static::created(function ($user) {
-            Redis::incr('new-users-current-month');
+            if ($user->created_at >= now()->startOfMonth()) {
+                Redis::incr(config('redis.keys.users.new_current_month'));
+            }
         });
 
 
         static::deleted(function ($user) {
             if ($user->created_at >= now()->startOfMonth()) {
-                Redis::decr('new-users-current-month');
+                Redis::decr(config('redis.keys.users.new_current_month'));
             }
 
-            Redis::del('users:online:'.$user->id);
+            Redis::del(config('redis.keys.users.online') . ':' . $user->id);
+            Redis::decr(config('redis.keys.users.online_count'));
         });
     }
 
@@ -74,23 +77,25 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->admin;
     }
 
-    public function getLastSeenAtAttribute($value)
+    public function getLastActiveAtAttribute($value)
     {
         if (is_null($value)) {
-            if (Redis::exists('users:online:'.$this->id)){
-                return Carbon::create(json_decode(Redis::get('users:online:'.$this->id))->last_active_at);
+            $userRedisKey = config('redis.keys.users.online') . ':'. $this->id;
+
+            if (! Redis::exists($userRedisKey)){
+                // Extra fail save if the query takes too long, and the user is just out of the cache. Then predict the time.
+                return now()->subSeconds(config('user.online.expire'));
             }
 
-            // Extra fail save if the query takes too long, and the user is just out of the cache. Then predict the time.
-            return now()->subSeconds(config('user.online.expire'));
+            $value = json_decode(Redis::get($userRedisKey))->last_active_at;
         }
 
-        return $value;
+        return Carbon::create($value);
     }
 
     public function isOnline()
     {
-        if ($this->last_seen_at > now()->subSeconds(config('user.online.expire'))){
+        if ($this->last_active_at > now()->subSeconds(config('user.online.expire'))){
             return true;
         }
 
@@ -98,15 +103,17 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     public function goesOnline() {
-        if (! Redis::exists('users:online:'.$this->id)){
+        $userRedisKey = config('redis.keys.users.online') . ':'. $this->id;
+
+        if (! Redis::exists($userRedisKey)){
             $this->timestamps = false;
             $this->last_active_at = null;
             $this->save();
 
-            Redis::incr('users:online_count');
+            Redis::incr(config('redis.keys.users.online_count'));
         }
 
-        Redis::set('users:online:'.$this->id, json_encode([
+        Redis::set($userRedisKey, json_encode([
                 'id' => $this->id,
                 'username' => $this->username,
                 'last_active_at' => now()->toDateTimeString()
@@ -120,8 +127,9 @@ class User extends Authenticatable implements MustVerifyEmail
         $this->save();
 
         if ($skipRedisTasks == false) {
-            Redis::del('users:online:'.$this->id);
-            Redis::decr('users:online_count');
+            $userRedisKey = config('redis.keys.users.online') . ':'. $this->id;
+            Redis::del($userRedisKey);
+            Redis::decr(config('redis.keys.users.online_count'));
         }
     }
 

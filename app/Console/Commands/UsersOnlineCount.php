@@ -38,10 +38,12 @@ class UsersOnlineCount extends Command
      */
     public function handle()
     {
-        $count = count(Redis::keys('users:online:*'));
+        $amount = count(Redis::keys('users:online:*'));
 
-        $this->info('Users currently online: '.$count);
+        Redis::set(config('redis.keys.users.online_count'), $amount);
 
-        return $count;
+        $this->info('Users currently online: '.$amount);
+
+        return $amount;
     }
 }

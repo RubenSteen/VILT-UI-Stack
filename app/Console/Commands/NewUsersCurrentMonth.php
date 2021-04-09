@@ -52,8 +52,10 @@ class NewUsersCurrentMonth extends Command
 
         $amount = User::where('created_at', '>=', $this->startOfMonth)->count();
 
-        Redis::set('new-users-current-month', $amount);
+        Redis::set(config('redis.keys.users.new_current_month'), $amount);
 
-        $this->info('Finished running command \'users:new-current-month\'');
+        $this->info("New users current month ({$this->startOfMonth}): $amount");
+
+        return $amount;
     }
 }
