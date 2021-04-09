@@ -116,9 +116,6 @@
                                 <table class="min-w-full">
                                     <thead>
                                     <tr class="border-t border-gray-200">
-<!--                                        <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">-->
-<!--                                            ID-->
-<!--                                        </th>-->
                                         <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Username
                                         </th>
@@ -137,13 +134,6 @@
                                     <tbody class="bg-white divide-y divide-gray-100">
 
                                     <tr v-if="users.data.length > 0" v-for="(user, index) in users.data" :key="user.id" class="hover:bg-gray-50 cursor-pointer">
-
-<!--                                        <td class="px-6 py-3 whitespace-nowrap text-sm font-medium text-gray-900">-->
-<!--                                            <div class="flex items-center space-x-3 lg:pl-2">-->
-<!--                                                {{ user.id }}-->
-<!--                                            </div>-->
-<!--                                        </td>-->
-
                                         <td class="px-6 py-3 text-sm text-gray-500 font-medium">
                                             {{ user.username }}
                                         </td>
