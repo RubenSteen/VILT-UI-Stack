@@ -28,6 +28,12 @@ class User extends Authenticatable implements MustVerifyEmail
             }
         });
 
+        static::restored(function ($user) {
+            if ($user->created_at >= now()->startOfMonth()) {
+                Redis::incr(config('redis.keys.users.new_current_month'));
+            }
+        });
+
 
         static::deleted(function ($user) {
             if ($user->created_at >= now()->startOfMonth()) {
