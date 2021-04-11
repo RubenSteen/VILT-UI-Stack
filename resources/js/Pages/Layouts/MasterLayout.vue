@@ -9,7 +9,7 @@
 
 <script>
 import MasterLayout from '@/Layouts/MasterLayout';
-import FlashMessages from '../Shared/FlashMessages';
+import FlashMessages from '@/Shared/FlashMessages';
 
 export default {
     name: 'MasterLayout',

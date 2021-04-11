@@ -1,5 +1,8 @@
 <template>
     <master-layout :title="title">
+
+        <logout-modal :show="showLogoutModal" @toggle="toggleLogoutModal()" />
+
         <!-- This example requires Tailwind CSS v2.0+ -->
         <div class="h-screen flex overflow-hidden">
             <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
@@ -135,7 +138,7 @@
                                                 View profile
                                             </inertia-link>
                                         </div>
-                                        <div @click="logout()" class="cursor-pointer ml-auto">
+                                        <div @click="toggleLogoutModal()" class="cursor-pointer ml-auto">
                                             <svg
                                                 class="text-red-500 h-6 w-6"
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -244,7 +247,7 @@
                                             View profile
                                         </inertia-link>
                                     </div>
-                                    <div @click="logout()" class="cursor-pointer ml-auto">
+                                    <div @click="toggleLogoutModal()" class="cursor-pointer ml-auto">
                                         <svg
                                             class="text-red-500 h-6 w-6"
                                             xmlns="http://www.w3.org/2000/svg"
@@ -324,12 +327,14 @@
 
 <script>
 import MasterLayout from '@/Layouts/MasterLayout';
+import LogoutModal from '@/Shared/LogoutModal'
 
 export default {
     name: 'DefaultLayout',
 
     components: {
         MasterLayout,
+        LogoutModal,
     },
 
     props: {
@@ -339,6 +344,7 @@ export default {
     data() {
         return {
             showSidebar: false,
+            showLogoutModal: false,
         };
     },
 
@@ -347,6 +353,10 @@ export default {
             if (confirm('Are you sure you want to logout?')) {
                 this.$inertia.post(this.route('logout'));
             }
+        },
+
+        toggleLogoutModal() {
+            this.showLogoutModal = !this.showLogoutModal;
         },
     },
 };
