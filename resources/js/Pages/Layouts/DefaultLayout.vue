@@ -1,6 +1,5 @@
 <template>
     <master-layout :title="title">
-
         <logout-modal :show="showLogoutModal" @toggle="toggleLogoutModal()" />
 
         <!-- This example requires Tailwind CSS v2.0+ -->
@@ -327,7 +326,7 @@
 
 <script>
 import MasterLayout from '@/Layouts/MasterLayout';
-import LogoutModal from '@/Shared/LogoutModal'
+import LogoutModal from '@/Shared/LogoutModal';
 
 export default {
     name: 'DefaultLayout',
