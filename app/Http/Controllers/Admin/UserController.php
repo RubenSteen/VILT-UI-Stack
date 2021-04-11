@@ -38,7 +38,7 @@ class UserController extends AdminBaseController
                     'month' => $dateTime->firstOfMonth()->format('F'),
                     'amount' => readable_number(Redis::get(config('redis.keys.users.new_current_month'), Artisan::call('users:new-current-month'))),
                 ],
-                'usersOnline' => readable_number(Redis::get(config('redis.keys.users.online_count'), Artisan::call('users:online-count')))
+                'usersOnline' => readable_number(Redis::get(config('redis.keys.users.online_count'), Artisan::call('users:online-count'))),
             ],
             'users' => User::orderByDesc('id')
                 ->filter($filters)
