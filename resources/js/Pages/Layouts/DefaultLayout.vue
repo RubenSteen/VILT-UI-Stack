@@ -7,7 +7,7 @@
         <div class="h-screen flex overflow-hidden">
             <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
             <div class="md:hidden">
-                <div :class="{ 'pointer-events-none': !showSidebar }" class="fixed inset-0 flex z-40">
+                <div :class="{ 'pointer-events-none': !showSidebar }" class="fixed inset-0 flex z-30">
                     <transition
                         enter-active-class="transition-opacity ease-linear duration-300"
                         enter-class="opacity-0"

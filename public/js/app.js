@@ -52390,7 +52390,7 @@ var render = function() {
           _c(
             "div",
             {
-              staticClass: "fixed inset-0 flex z-40",
+              staticClass: "fixed inset-0 flex z-30",
               class: { "pointer-events-none": !_vm.showSidebar }
             },
             [
@@ -54071,7 +54071,7 @@ var render = function() {
               expression: "show"
             }
           ],
-          staticClass: "fixed z-10 inset-0 overflow-y-auto",
+          staticClass: "fixed z-40 inset-0 overflow-y-auto",
           attrs: {
             "aria-labelledby": "modal-title",
             role: "dialog",
